@@ -1,4 +1,4 @@
-# Kaza - Location d'appartements
+# ArgentBank - Banque en ligne
 
 Treiziéme projet du parcours "Développeur Front-End" chez OpenClassroom. L'objectif est de créer la section utilisateur d'une application de banking, avec gestion de l'authentification (JWT), React, React-router et Redux.
 
