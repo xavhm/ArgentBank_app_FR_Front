@@ -8,7 +8,7 @@ const Header: React.FC = () => {
     <nav className={styles.main_nav}>
       <NavLink to="/" className={styles.main_nav_logo}>
         <img className={styles.main_nav_logo_image} src={logo} alt="Argent Bank Logo" />
-        <h1 className={styles.sr_only}>Argent Bank</h1>
+        <h1 className={`sr_only`}>Argent Bank</h1>
       </NavLink>
       <div>
         <NavLink to="/login" className={styles.main_nav_item}>
