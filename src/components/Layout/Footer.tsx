@@ -3,9 +3,9 @@ import styles from "./Footer.module.scss";
 
 const Footer: React.FC = () => {
   return (
-    <div>
-      <p>Footer</p>
-    </div>
+    <footer className={styles.footer}>
+      <p className={styles.footer_text}>Copyright 2020 Argent Bank</p>
+    </footer>
   );
 };
 
