@@ -23,20 +23,20 @@ const Login: React.FunctionComponent = () => {
     }
   }, []);
 
-  function updateUserEmail(event: React.ChangeEvent) {
+  function updateUserEmail(event: React.ChangeEvent): void {
     setUserLogin({ ...userLogin, email: (event.target as HTMLInputElement).value });
   }
 
-  function updateUserPassword(event: React.ChangeEvent) {
+  function updateUserPassword(event: React.ChangeEvent): void {
     setUserLogin({ ...userLogin, password: (event.target as HTMLInputElement).value });
   }
 
-  function updateRemember(event: React.ChangeEvent) {
+  function updateRemember(event: React.ChangeEvent): void {
     if (remember) localStorage.clear();
     setRemember((prev) => !prev);
   }
 
-  async function submitUser(event: React.FormEvent<HTMLFormElement>) {
+  async function submitUser(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     if (remember) {
       localStorage.setItem(
