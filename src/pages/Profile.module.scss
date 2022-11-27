@@ -34,6 +34,32 @@
   flex: 1;
 }
 
+.edition_wrapper {
+  margin-top: 20px;
+
+  .edition_inputs {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    input {
+      padding: 5px;
+      font-size: 1.2rem;
+
+      &:focus {
+        outline-width: 0;
+      }
+    }
+  }
+
+  .edition_buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
 .edit_button {
   border-color: #00bc77;
   background-color: #00bc77;
@@ -41,6 +67,7 @@
   font-weight: bold;
   padding: 10px;
   margin-top: 1.5rem;
+  min-width: 100px;
 }
 
 .header {

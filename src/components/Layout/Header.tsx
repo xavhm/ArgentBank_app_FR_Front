@@ -9,6 +9,7 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isUserConnected = useAppSelector((state) => state.user.token);
+  const userFirstName = useAppSelector((state) => state.user.firstName);
 
   function deconnectUser(): void {
     dispatch(resetUserToken());
@@ -23,10 +24,14 @@ const Header: React.FC = () => {
       </NavLink>
       <div>
         {isUserConnected ? (
-          <a className={styles.main_nav_item} onClick={deconnectUser}>
+          <div className={styles.main_nav_content}>
             <i className={`fa fa-user-circle`}></i>
-            Sign Out
-          </a>
+            <p className={styles.main_nav_firstname}>{userFirstName}</p>
+            <a className={styles.main_nav_item} onClick={deconnectUser}>
+              <i className={`fa fa-sign-out`}></i>
+              Sign Out
+            </a>
+          </div>
         ) : (
           <NavLink to="/login" className={styles.main_nav_item}>
             <i className={`fa fa-user-circle`}></i>
