@@ -32,10 +32,16 @@
 
 .input_remember {
   display: flex;
+  accent-color: #00bc77;
 }
 
 .input_remember label {
   margin-left: 0.25rem;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
 }
 
 .input_wrapper {
