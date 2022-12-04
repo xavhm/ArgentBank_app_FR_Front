@@ -1,0 +1,286 @@
+swagger: "2.0"
+info:
+  title: Bank Argent - Transactions - API documentation
+  description: API endpoints schema for transactions features
+  version: "1.0.0"
+  termsOfService: "http://swagger.io/terms/"
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - https
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /accounts/{userID}:
+    get:
+      tags:
+        - User Accounts List
+      summary: Get user accounts list with userID
+      description: API for a user's accounts list
+      security:
+        - Bearer: []
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: userID
+          description: Numeric ID of the user
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: User accounts list
+          schema:
+            $ref: "#/definitions/accountsList"
+        "400":
+          description: Invalid Fields
+        "401":
+          description: "Unauthorized or Invalid User Token"
+        "404":
+          description: "User not found"
+        "500":
+          description: Internal Server Error
+  /transactions/{accountID}:
+    get:
+      tags:
+        - Transactions list of the current month, for a specific account
+      summary: Get transactions list with an accountID
+      description: API for an account's transactions list
+      security:
+        - Bearer: []
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: accountID
+          description: Numeric ID of the account
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Account transactions List
+          schema:
+            $ref: "#/definitions/transactionsList"
+        "400":
+          description: Invalid Fields
+        "401":
+          description: "Unauthorized or invalid user token"
+        "404":
+          description: "Account not found"
+        "500":
+          description: Internal Server Error
+  /transaction/{transactionID}:
+    post:
+      tags:
+        - Add infos field on a transaction
+      summary: Add infos field on a transactions with a transactionID
+      description: API for to create infos field on a transaction
+      security:
+        - Bearer: []
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: transactionID
+          description: Numeric ID of the transaction
+          required: true
+          type: integer
+        - in: body
+          name: body
+          description: Transactions infos
+          required: true
+          schema:
+            $ref: "#/definitions/transactionInfos"
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Updated transaction
+          schema:
+            $ref: "#/definitions/transaction"
+        "400":
+          description: Invalid Fields
+        "401":
+          description: "Unauthorized or invalid user token"
+        "404":
+          description: "Transaction not found"
+        "500":
+          description: Internal Server Error
+    put:
+      tags:
+        - Update infos field on a transaction
+      summary: Update infos field on a transactions with a transactionID
+      description: API for to update infos field on a transaction
+      security:
+        - Bearer: []
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: transactionID
+          description: Numeric ID of the transaction
+          required: true
+          type: integer
+        - in: body
+          name: body
+          description: Transactions infos
+          required: true
+          schema:
+            $ref: "#/definitions/transactionInfos"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Updated transaction
+          schema:
+            $ref: "#/definitions/transaction"
+        "400":
+          description: Invalid Fields
+        "401":
+          description: "Unauthorized or invalid user token"
+        "404":
+          description: "Transaction not found"
+        "500":
+          description: Internal Server Error
+    delete:
+      tags:
+        - Delete infos field on a transaction
+      summary: Delete infos field on a transactions with a transactionID
+      description: API for to delete infos field on a transaction
+      security:
+        - Bearer: []
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: transactionID
+          description: Numeric ID of the transaction
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: Deleted transaction infos
+        "400":
+          description: Invalid Fields
+        "401":
+          description: "Unauthorized or invalid user token"
+        "404":
+          description: "Transaction not found"
+        "500":
+          description: Internal Server Error
+definitions:
+  accountsList:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Account id
+        title:
+          type: string
+          description: Account title
+        balance:
+          type: number
+          description: Current account balance
+  transaction:
+    type: object
+    properties:
+      id:
+        type: number
+        description: Transaction id
+      timestamp:
+        type: number
+        description: Transaction data as Timestamp
+      title:
+        type: string
+        description: Transaction title
+      amount:
+        type: number
+        description: Transaction amount
+      balance:
+        type: number
+        description: Account balance after transaction
+      infos:
+        type: object
+        description: Transaction metadata
+        properties:
+          type:
+            type: string
+            description: Transaction type
+          category:
+            type: string
+            description: Transaction description
+          notes:
+            type: string
+            description: Transaction notes
+  transactionInfos:
+    type: object
+    description: Transaction metadata
+    properties:
+      type:
+        type: string
+        description: Transaction type
+      category:
+        type: string
+        description: Transaction description
+      notes:
+        type: string
+        description: Transaction notes
+  transactionsList:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Transaction id
+        timestamp:
+          type: number
+          description: Transaction data as Timestamp
+        title:
+          type: string
+          description: Transaction title
+        amount:
+          type: number
+          description: Transaction amount
+        balance:
+          type: number
+          description: Account balance after transaction
+        infos:
+          type: object
+          description: Transaction metadata
+          properties:
+            type:
+              type: string
+              description: Transaction type
+            category:
+              type: string
+              description: Transaction description
+            notes:
+              type: string
+              description: Transaction notes
